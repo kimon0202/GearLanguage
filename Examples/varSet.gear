@@ -1,0 +1,21 @@
+var: name = "Gustavo"
+var: lastName = "Bauke"
+
+func changeVars():
+    name = "Gabriel";
+    lastName = "Pasquale";
+    anotherVar = "Test!";
+:end
+
+func HandlePrint():
+    print(anotherVar);
+    print(name + lastName);
+:end
+
+method start():
+    HandlePrint();
+    changeVars();
+    HandlePrint();
+:end
+
+var: anotherVar = "Hello World!";
