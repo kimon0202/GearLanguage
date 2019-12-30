@@ -18,7 +18,12 @@ namespace GearLanguage.Base_Classes
         private string name;
         private string value;
         private VariableType type;
-         
+
+        public VariableNode(string name, string value)
+        {
+            this.name = name;
+            this.value = value;
+        }
 
         public VariableNode(string name, string value, VariableType type)
         {
@@ -32,6 +37,11 @@ namespace GearLanguage.Base_Classes
             this.name = name;
             this.type = type;
             value = "";
+        }
+
+        public void SetType(VariableType type)
+        {
+            this.type = type;
         }
 
         public string GetName()

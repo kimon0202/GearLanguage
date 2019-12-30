@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Z.Expressions.Eval" Version="3.0.11" />
+    <PackageReference Include="DynamicExpresso.Core" Version="2.3.1" />
   </ItemGroup>
 
 </Project>
