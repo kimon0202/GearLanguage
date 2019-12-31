@@ -3,19 +3,20 @@ using GearLanguage.Lang;
 using GearLanguage.Base_Classes;
 using System.IO;
 using System;
+using DynamicExpresso;
 
 namespace GearLanguage
 {
     class Program
     {
-        static string fileName = "varSet.gear";
+        static string fileName = "eval.gear";
         //cahnge this to reflect your pc
         //static string testFilesPath = "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples";
         static string testFilesPath = @"E:\modl\GearLanguage\Examples";
 
         static Lexer lexer;
         static Parser parser;
-        static Interpreter interpreter;
+        static Lang.Interpreter interpreter;
 
         static Tree tree;
         static string[] tokens;
@@ -31,7 +32,7 @@ namespace GearLanguage
             parser = new Parser(tokens);
             tree = parser.CreateTree();
 
-            interpreter = new Interpreter(tree);
+            interpreter = new Lang.Interpreter(tree);
             interpreter.Run();
         }
     }

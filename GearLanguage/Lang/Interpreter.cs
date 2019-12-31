@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using GearLanguage.Base_Classes;
 using GearLanguage.Extensions;
+using DynamicExpresso;
 
 namespace GearLanguage.Lang
 {
@@ -11,10 +12,16 @@ namespace GearLanguage.Lang
         private Tree tree;
         private char[] addSymbol;
 
+        private ExpressionParser expressionParser;
+        private DynamicExpresso.Interpreter evaluator;
+
         public Interpreter(Tree tree)
         {
             this.tree = tree;
             addSymbol = new char[] { '+' };
+
+            expressionParser = new ExpressionParser(tree);
+            evaluator = new DynamicExpresso.Interpreter();
         }
 
         public void Run()
@@ -25,7 +32,10 @@ namespace GearLanguage.Lang
                 {
                     if(node.GetName() == "print")
                     {
-                        HandleStringPrint(node.GetValue());
+                        //HandleStringPrint(node.GetValue());
+                        string[] tokens = expressionParser.Parse(node.GetValue());
+                        string value = BuildString(tokens);
+                        HandlePrint(value);
                     }
 
                     if(tree.VarExists(node.GetName()))
@@ -88,45 +98,67 @@ namespace GearLanguage.Lang
             tree.SetVar(node.GetName(), builder.ToString());
         }
 
+        private string BuildString(string[] tokens)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            foreach(string token in tokens)
+            {
+                string value = token;
+
+                if(tree.VarExists(token))
+                {
+                    value = HandleVarCalling(token);
+                }
+
+                builder.Append(value);
+            }
+
+            return builder.ToString();
+        }
+
         public void HandleStringPrint(string value)
         {
             string[] splitValue;
             StringBuilder builder = new StringBuilder();
             
-            if(value.Contains("+"))
+            if (value.Contains("+"))
             {
                 splitValue = value.Split(addSymbol);
 
-                for(int i = 0; i < splitValue.Length; i++)
+                for (int i = 0; i < splitValue.Length; i++)
                 {
                     splitValue[i] = splitValue[i].Trim();
 
-                    if(tree.VarExists(splitValue[i]))
+                    if (tree.VarExists(splitValue[i]))
                     {
                         string newValue = HandleVarCalling(splitValue[i]) + " ";
                         newValue = newValue.RemoveQuotes();
 
                         builder.Append(newValue);
-                    }else
+                    }
+                    else
                     {
-                        if(splitValue[i].Contains("\""))
+                        if (splitValue[i].Contains("\""))
                         {
                             string newValue = splitValue[i].RemoveQuotes();
                             builder.Append(newValue);
                         }
                     }
                 }
-            }else
+            }
+            else
             {
-                if(tree.VarExists(value))
+                if (tree.VarExists(value))
                 {
                     string newValue = HandleVarCalling(value);
                     newValue = newValue.RemoveQuotes();
 
                     builder.Append(newValue);
-                }else 
+                }
+                else
                 {
-                    if(value.Contains("\""))
+                    if (value.Contains("\""))
                     {
                         value = value.RemoveQuotes();
                         builder.Append(value);
@@ -139,7 +171,8 @@ namespace GearLanguage.Lang
 
         private void HandlePrint(string value)
         {
-            Console.WriteLine(value);
+            var toPrint = evaluator.Eval(value);
+            Console.WriteLine(toPrint.ToString());
         }
 
         private string HandleVarCalling(string varName)
