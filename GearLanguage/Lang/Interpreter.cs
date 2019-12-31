@@ -41,13 +41,17 @@ namespace GearLanguage.Lang
                     if(tree.VarExists(node.GetName()))
                     {
                         string value = node.GetValue();
+                        
                         switch (node.GetCarryAction())
                         {
-                            case "+=": value = tree.GetVar(node.GetName()).GetValue() + "+" + value; break;
-                            case "++": value = tree.GetVar(node.GetName()).GetValue() + 1; break;
+                            case "+=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "+" + value; break;
+                            case "-=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "-" + value; break;
+                            case "*=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "*" + value; break;
+                            case "/=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "/" + value; break;
+                            case "++": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "+ 1"; break;
+                            case "--": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "- 1"; break;
+                            default: value = node.GetValue(); break;
                         }
-                       // if (node.GetCarryAction() == "+=") value = tree.GetVar(node.GetName()).GetValue() + "+" + value;
-                        //else if (node.GetCarryAction() == "++")
 
                         string[] tokens = expressionParser.Parse(value);
                         string toEvalValue = BuildString(tokens);

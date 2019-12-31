@@ -9,7 +9,7 @@ namespace GearLanguage
 {
     class Program
     {
-        static string fileName = "varSet.gear";
+        static string fileName = "eval.gear";
         //cahnge this to reflect your pc
         //static string testFilesPath = "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples";
         static string testFilesPath = @"E:\modl\GearLanguage\Examples";

@@ -4,7 +4,9 @@ var: num = 31;
 
 method start():
 	print("Hello");
-	num += 656 * 43;
+	num += 655;
+	num++;
+	num *= 43;
 	print(num);
 	print("Hello " + "World");
 	print("Hello, " + name + " " + lastName + ". How are you?");

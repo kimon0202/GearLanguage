@@ -33,24 +33,7 @@ namespace GearLanguage.Lang
 
             string methodId = "";
             string funcId = "";
-            for (int i = 0; i < tokens.Length; i++)
-            {
-                if (tokens[i] == "var")
-                {
-                    string name = "";
-                    string value = "";
-
-                    string[] tmp = tokens[i + 1].Split(varsDeclarationChars);
-                    name = tmp[0].Trim();
-                    value = ClearTokens(tmp[1]).Trim();
-
-                    VariableNode node = new VariableNode(name, value, VariableType.GENERIC);
-                    int? id = tree.AddToVars(node);
-
-                    vars.Add(name, id);
-                }
-            }
-
+           
             for (int i = 0; i < tokens.Length; i++)
             {
                 if (tokens[i].Contains("#"))
@@ -100,23 +83,43 @@ namespace GearLanguage.Lang
                         tree.GetFunction(id).AddNode(node);
                     }
                 }
-                else if(tokens[i].Contains("=") && tokens[i - 1] != "var" && !tokens[i].Contains("=="))
+                if (tokens[i] == "var")
+                {
+                    string name = "";
+                    string value = "";
+
+                    string[] tmp = tokens[i + 1].Split(varsDeclarationChars);
+                    name = tmp[0].Trim();
+                    value = ClearTokens(tmp[1]).Trim();
+
+                    VariableNode node = new VariableNode(name, value, VariableType.GENERIC);
+                    int? id = tree.AddToVars(node);
+
+                    vars.Add(name, id);
+                }
+                else if (tokens[i].Contains("=") && tokens[i - 1] != "var" && !tokens[i].Contains("=="))
                 {
                     string name = "";
                     string value = "";
 
                     string[] tmp = tokens[i].Split(varsDeclarationChars);
-                    name = new string(tmp[0].ToCharArray().Where(c => c != '+').ToArray()).Trim();
+                    name = new string(tmp[0].ToCharArray()
+                        .Where(c => c != '+')
+                        .Where(c => c != '-')
+                        .Where(c => c != '*')
+                        .Where(c => c != '/')
+                        .ToArray()
+                    ).Trim();
                     value = ClearTokens(tmp[1]).Trim();
 
-                    VariableNode var = tree.GetVar(name);
                     Node node;
-                    var = new VariableNode(name, value, VariableType.GENERIC);
+                    VariableNode var = new VariableNode(name, value, VariableType.GENERIC);
 
-                    if (tokens[i].Contains("+=") && (var.GetVarType() == VariableType.GENERIC || var.GetVarType() == VariableType.STRING))
-                        node = new Node(var.GetName(), var.GetValue(), "+=");
-                    else
-                        node = new Node(var.GetName(), var.GetValue(), null);
+                    if (tokens[i].Contains("+=")) node = new Node(var.GetName(), var.GetValue(), "+=");
+                    else if (tokens[i].Contains("-=")) node = new Node(var.GetName(), var.GetValue(), "-=");
+                    else if (tokens[i].Contains("*=")) node = new Node(var.GetName(), var.GetValue(), "*=");
+                    else if (tokens[i].Contains("/=")) node = new Node(var.GetName(), var.GetValue(), "/=");
+                    else node = new Node(var.GetName(), var.GetValue(), null);
 
                     if (appendToMethod)
                     {
@@ -142,6 +145,28 @@ namespace GearLanguage.Lang
                     if (appendToMethod)
                     {
                         int id = (int)methods[methodId];                       
+                        tree.GetMethod(id).AddNode(node);
+                    }
+                    else if (appendToFunc)
+                    {
+                        int id = (int)funcs[funcId];
+                        tree.GetFunction(id).AddNode(node);
+                    }
+                }
+                else if (tokens[i].Contains("--"))
+                {
+                    string name = "";
+
+                    string[] tmp = tokens[i].Split('-');
+                    name = tmp[0].Trim();
+                    var value = "";
+
+                    VariableNode varNode = new VariableNode(name, value.ToString(), VariableType.GENERIC);
+                    Node node = new Node(varNode.GetName(), varNode.GetValue(), "--");
+
+                    if (appendToMethod)
+                    {
+                        int id = (int)methods[methodId];
                         tree.GetMethod(id).AddNode(node);
                     }
                     else if (appendToFunc)
@@ -195,5 +220,6 @@ namespace GearLanguage.Lang
                 .ToArray()
             );
         }
+
     }
 }
