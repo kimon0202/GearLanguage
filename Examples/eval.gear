@@ -1,10 +1,10 @@
 var: name = "Gustavo";
 var: lastName = "Bauke";
-var: num = 1;
+var: num = 31;
 
 method start():
 	print("Hello");
-	num = 656 * 43 + 31;
+	num += 656 * 43 + 1;
 	print(num);
 	print("Hello " + "World");
 	print("Hello, " + name + " " + lastName + ". How are you?");

@@ -112,7 +112,7 @@ namespace GearLanguage.Lang
                     VariableNode var = tree.GetVar(name);
                     
                     if (tokens[i].Contains("+=") && (var.GetVarType() == VariableType.GENERIC || var.GetVarType() == VariableType.STRING))
-                        value = var.GetValue() + ClearTokens(tmp[1]).Trim();
+                        value = var.GetValue() + "+" + ClearTokens(tmp[1]).Trim();
 
                     var = new VariableNode(name, value, VariableType.GENERIC);
 

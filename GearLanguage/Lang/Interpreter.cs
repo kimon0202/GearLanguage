@@ -42,6 +42,7 @@ namespace GearLanguage.Lang
                     {
                         string[] tokens = expressionParser.Parse(node.GetValue());
                         string value = BuildString(tokens);
+                        Console.WriteLine(value);
                         HandleVarSet(value, node);
                     }
                 }
