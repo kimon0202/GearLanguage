@@ -1,0 +1,11 @@
+E:\modl\GearLanguage\GearLanguage\bin\Debug\netcoreapp2.2\GearLanguage.deps.json
+E:\modl\GearLanguage\GearLanguage\bin\Debug\netcoreapp2.2\GearLanguage.runtimeconfig.json
+E:\modl\GearLanguage\GearLanguage\bin\Debug\netcoreapp2.2\GearLanguage.runtimeconfig.dev.json
+E:\modl\GearLanguage\GearLanguage\bin\Debug\netcoreapp2.2\GearLanguage.dll
+E:\modl\GearLanguage\GearLanguage\bin\Debug\netcoreapp2.2\GearLanguage.pdb
+E:\modl\GearLanguage\GearLanguage\obj\Debug\netcoreapp2.2\GearLanguage.csproj.CoreCompileInputs.cache
+E:\modl\GearLanguage\GearLanguage\obj\Debug\netcoreapp2.2\GearLanguage.AssemblyInfoInputs.cache
+E:\modl\GearLanguage\GearLanguage\obj\Debug\netcoreapp2.2\GearLanguage.AssemblyInfo.cs
+E:\modl\GearLanguage\GearLanguage\obj\Debug\netcoreapp2.2\GearLanguage.dll
+E:\modl\GearLanguage\GearLanguage\obj\Debug\netcoreapp2.2\GearLanguage.pdb
+E:\modl\GearLanguage\GearLanguage\obj\Debug\netcoreapp2.2\GearLanguage.csprojAssemblyReference.cache

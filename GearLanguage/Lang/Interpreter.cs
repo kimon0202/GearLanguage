@@ -30,17 +30,69 @@ namespace GearLanguage.Lang
 
                     if(tree.VarExists(node.GetName()))
                     {
-                        tree.SetVar(node.GetName(), node.GetValue());
+                        HandleVarSet(node);
                     }
                 }
             }
+        }
+        public void HandleVarSet(Node node)
+        {
+            string[] splitValue;
+            StringBuilder builder = new StringBuilder();
+
+            if (node.GetValue().Contains("+") && !node.GetValue().Contains("++"))
+            {
+                splitValue = node.GetValue().Split(addSymbol);
+
+                for (int i = 0; i < splitValue.Length; i++)
+                {
+                    splitValue[i] = splitValue[i].Trim();
+
+                    if (tree.VarExists(splitValue[i]))
+                    {
+                        string newValue = HandleVarCalling(splitValue[i]) + " ";
+                        newValue = newValue.RemoveQuotes();
+
+                        builder.Append(newValue);
+                    }
+                    else
+                    {
+                        if (splitValue[i].Contains("\""))
+                        {
+                            string newValue = splitValue[i].RemoveQuotes();
+                            builder.Append(newValue);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (tree.VarExists(node.GetValue()))
+                {
+                    string newValue = HandleVarCalling(node.GetValue());
+                    newValue = newValue.RemoveQuotes();
+
+                    builder.Append(newValue);
+                }
+                else
+                {
+                    if (node.GetValue().Contains("\""))
+                    { 
+                        builder.Append(node.GetValue().RemoveQuotes());
+                    } else
+                    {
+                        builder.Append(node.GetValue());
+                    }
+                }
+            }
+            tree.SetVar(node.GetName(), builder.ToString());
         }
 
         public void HandleStringPrint(string value)
         {
             string[] splitValue;
             StringBuilder builder = new StringBuilder();
-
+            
             if(value.Contains("+"))
             {
                 splitValue = value.Split(addSymbol);

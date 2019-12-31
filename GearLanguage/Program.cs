@@ -10,7 +10,8 @@ namespace GearLanguage
     {
         static string fileName = "varSet.gear";
         //cahnge this to reflect your pc
-        static string testFilesPath = "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples";
+        //static string testFilesPath = "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples";
+        static string testFilesPath = @"E:\modl\GearLanguage\Examples";
 
         static Lexer lexer;
         static Parser parser;

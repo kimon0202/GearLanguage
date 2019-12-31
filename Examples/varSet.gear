@@ -1,21 +1,23 @@
 var: name = "Gustavo"
-var: lastName = "Bauke"
 
 func changeVars():
-    name = "Gabriel";
-    lastName = "Pasquale";
-    anotherVar = "Test!";
+    name = "Gabriel" + " " + "Pasquale";
+    anotherVar = "Change Vars!";
+    counter++;
 :end
 
 func HandlePrint():
     print(anotherVar);
-    print(name + lastName);
+    print("counter = " + counter)
+    print(name);
 :end
 
 method start():
+    name = name + "Bauke";
     HandlePrint();
     changeVars();
     HandlePrint();
 :end
 
+var: counter = 0;
 var: anotherVar = "Hello World!";

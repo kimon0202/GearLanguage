@@ -33,8 +33,25 @@ namespace GearLanguage.Lang
 
             string methodId = "";
             string funcId = "";
+            for (int i = 0; i < tokens.Length; i++)
+            {
+                if (tokens[i] == "var")
+                {
+                    string name = "";
+                    string value = "";
 
-            for(int i = 0; i < tokens.Length; i++)
+                    string[] tmp = tokens[i + 1].Split(varsDeclarationChars);
+                    name = tmp[0].Trim();
+                    value = ClearTokens(tmp[1]).Trim();
+
+                    VariableNode node = new VariableNode(name, value, VariableType.GENERIC);
+                    int? id = tree.AddToVars(node);
+
+                    vars.Add(name, id);
+                }
+            }
+
+            for (int i = 0; i < tokens.Length; i++)
             {
                 if (tokens[i].Contains("#"))
                 {
@@ -83,36 +100,48 @@ namespace GearLanguage.Lang
                         tree.GetFunction(id).AddNode(node);
                     }
                 }
-                else if(tokens[i] == "var")
-                {
-                    string name = "";
-                    string value = "";
-
-                    string[] tmp = tokens[i + 1].Split(varsDeclarationChars);
-                    name = tmp[0].Trim();
-                    value = ClearTokens(tmp[1]).Trim();
-
-                    VariableNode node = new VariableNode(name, value, VariableType.GENERIC);
-                    int? id = tree.AddToVars(node);
-
-                    vars.Add(name, id);
-                }
-                else if(tokens[i].Contains("=") && tokens[i - 1] != "var")
+                else if(tokens[i].Contains("=") && tokens[i - 1] != "var" && !tokens[i].Contains("=="))
                 {
                     string name = "";
                     string value = "";
 
                     string[] tmp = tokens[i].Split(varsDeclarationChars);
-                    name = tmp[0].Trim();
+                    name = new string(tmp[0].ToCharArray().Where(c => c != '+').ToArray()).Trim();
                     value = ClearTokens(tmp[1]).Trim();
 
-                    VariableNode node = new VariableNode(name, value, VariableType.GENERIC);
+                    VariableNode var = tree.GetVar(name);
+                    
+                    if (tokens[i].Contains("+=") && (var.GetVarType() == VariableType.GENERIC || var.GetVarType() == VariableType.STRING))
+                        value = var.GetValue() + ClearTokens(tmp[1]).Trim();
+
+                    var = new VariableNode(name, value, VariableType.GENERIC);
 
                     if(appendToMethod)
                     {
                         int id = (int)methods[methodId];
-                        tree.GetMethod(id).AddNode(node.ToNode());
+                        tree.GetMethod(id).AddNode(var.ToNode());
                     }else if(appendToFunc)
+                    {
+                        int id = (int)funcs[funcId];
+                        tree.GetFunction(id).AddNode(var.ToNode());
+                    }
+                }
+                else if(tokens[i].Contains("++"))
+                {
+                    string name = "";
+
+                    string[] tmp = tokens[i].Split('+');
+                    name = tmp[0].Trim();
+                    var value = int.Parse(tree.GetVar(name).GetValue()) + 1;
+
+                    VariableNode node = new VariableNode(name, value.ToString(), VariableType.GENERIC);
+
+                    if (appendToMethod)
+                    {
+                        int id = (int)methods[methodId];
+                        tree.GetMethod(id).AddNode(node.ToNode());
+                    }
+                    else if (appendToFunc)
                     {
                         int id = (int)funcs[funcId];
                         tree.GetFunction(id).AddNode(node.ToNode());
