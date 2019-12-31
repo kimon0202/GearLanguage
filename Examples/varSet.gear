@@ -1,7 +1,8 @@
 var: name = "Gustavo"
 
 func changeVars():
-    name = "Gabriel" + " " + "Pasquale";
+    name = "Gabriel";
+    name += " Pasquale"
     anotherVar = "Change Vars!";
     counter++;
 :end
@@ -13,7 +14,7 @@ func HandlePrint():
 :end
 
 method start():
-    name = name + "Bauke";
+    name = name + " Bauke";
     HandlePrint();
     changeVars();
     HandlePrint();

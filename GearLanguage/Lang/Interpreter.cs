@@ -40,10 +40,18 @@ namespace GearLanguage.Lang
 
                     if(tree.VarExists(node.GetName()))
                     {
-                        string[] tokens = expressionParser.Parse(node.GetValue());
-                        string value = BuildString(tokens);
-                        Console.WriteLine(value);
-                        HandleVarSet(value, node);
+                        string value = node.GetValue();
+                        switch (node.GetCarryAction())
+                        {
+                            case "+=": value = tree.GetVar(node.GetName()).GetValue() + "+" + value; break;
+                            case "++": value = tree.GetVar(node.GetName()).GetValue() + 1; break;
+                        }
+                       // if (node.GetCarryAction() == "+=") value = tree.GetVar(node.GetName()).GetValue() + "+" + value;
+                        //else if (node.GetCarryAction() == "++")
+
+                        string[] tokens = expressionParser.Parse(value);
+                        string toEvalValue = BuildString(tokens);
+                        HandleVarSet(toEvalValue, node);
                     }
                 }
             }

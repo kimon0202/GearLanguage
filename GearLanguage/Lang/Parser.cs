@@ -110,20 +110,22 @@ namespace GearLanguage.Lang
                     value = ClearTokens(tmp[1]).Trim();
 
                     VariableNode var = tree.GetVar(name);
-                    
-                    if (tokens[i].Contains("+=") && (var.GetVarType() == VariableType.GENERIC || var.GetVarType() == VariableType.STRING))
-                        value = var.GetValue() + "+" + ClearTokens(tmp[1]).Trim();
-
+                    Node node;
                     var = new VariableNode(name, value, VariableType.GENERIC);
 
-                    if(appendToMethod)
+                    if (tokens[i].Contains("+=") && (var.GetVarType() == VariableType.GENERIC || var.GetVarType() == VariableType.STRING))
+                        node = new Node(var.GetName(), var.GetValue(), "+=");
+                    else
+                        node = new Node(var.GetName(), var.GetValue(), null);
+
+                    if (appendToMethod)
                     {
                         int id = (int)methods[methodId];
-                        tree.GetMethod(id).AddNode(var.ToNode());
+                        tree.GetMethod(id).AddNode(node);
                     }else if(appendToFunc)
                     {
                         int id = (int)funcs[funcId];
-                        tree.GetFunction(id).AddNode(var.ToNode());
+                        tree.GetFunction(id).AddNode(node);
                     }
                 }
                 else if(tokens[i].Contains("++"))
@@ -132,19 +134,20 @@ namespace GearLanguage.Lang
 
                     string[] tmp = tokens[i].Split('+');
                     name = tmp[0].Trim();
-                    var value = int.Parse(tree.GetVar(name).GetValue()) + 1;
+                    var value = "";
 
-                    VariableNode node = new VariableNode(name, value.ToString(), VariableType.GENERIC);
+                    VariableNode varNode = new VariableNode(name, value.ToString(), VariableType.GENERIC);
+                    Node node = new Node(varNode.GetName(), varNode.GetValue(), "++");
 
                     if (appendToMethod)
                     {
-                        int id = (int)methods[methodId];
-                        tree.GetMethod(id).AddNode(node.ToNode());
+                        int id = (int)methods[methodId];                       
+                        tree.GetMethod(id).AddNode(node);
                     }
                     else if (appendToFunc)
                     {
                         int id = (int)funcs[funcId];
-                        tree.GetFunction(id).AddNode(node.ToNode());
+                        tree.GetFunction(id).AddNode(node);
                     }
                 }
                 else if(tokens[i].Contains("func"))
