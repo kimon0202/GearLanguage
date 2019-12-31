@@ -23,3 +23,4 @@ E:\modl\GearLanguage\GearLanguage\bin\Debug\netcoreapp3.1\DynamicExpresso.Core.d
 E:\modl\GearLanguage\GearLanguage\obj\Debug\netcoreapp3.1\GearLanguage.AssemblyInfoInputs.cache
 E:\modl\GearLanguage\GearLanguage\obj\Debug\netcoreapp3.1\GearLanguage.AssemblyInfo.cs
 E:\modl\GearLanguage\GearLanguage\obj\Debug\netcoreapp3.1\GearLanguage.csproj.CopyComplete
+E:\modl\GearLanguage\GearLanguage\obj\Debug\netcoreapp3.1\GearLanguage.csprojAssemblyReference.cache

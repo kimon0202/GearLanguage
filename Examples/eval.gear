@@ -1,8 +1,11 @@
 var: name = "Gustavo";
 var: lastName = "Bauke";
+var: num = 1;
 
 method start():
-	print(656 * 43 + 31);
+	print("Hello");
+	num = 656 * 43 + 31;
+	print(num);
 	print("Hello " + "World");
 	print("Hello, " + name + " " + lastName + ". How are you?");
 :end
