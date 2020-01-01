@@ -8,9 +8,9 @@ namespace GearLanguage.Base_Classes
     {
         private string name;
         private string value;
-        private string? carryAction;
+        private string[] carryAction;
 
-        public Node(string name, string value, string? carryAction)
+        public Node(string name, string value, string[] carryAction)
         {
             this.name = name;
             this.value = value;
@@ -41,9 +41,14 @@ namespace GearLanguage.Base_Classes
             return value;
         }
 
-        public string GetCarryAction()
+        public string[] GetCarryAction()
         {
             return carryAction;
+        }
+
+        public string GetCarryAction(int index)
+        {
+            return carryAction[index];
         }
     }
 }

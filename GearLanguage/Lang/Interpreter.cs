@@ -30,7 +30,8 @@ namespace GearLanguage.Lang
             {
                 foreach(Node node in metNode.GetNodes())
                 {
-                    if(node.GetName() == "print")
+
+                    if (node.GetName() == "print")
                     {
                         //HandleStringPrint(node.GetValue());
                         string[] tokens = expressionParser.Parse(node.GetValue());
@@ -38,11 +39,17 @@ namespace GearLanguage.Lang
                         HandlePrint(value);
                     }
 
-                    if(tree.VarExists(node.GetName()))
+                    if (tree.VarExists(node.GetName()))
                     {
                         string value = node.GetValue();
-                        
-                        switch (node.GetCarryAction())
+
+                        if (value.Contains("input"))
+                        {
+                            value = HandleInput(node.GetCarryAction()[1]);
+                            // value.Replace("input", HandleInput(node.GetCarryAction()[1]));
+                        }
+
+                        switch (node.GetCarryAction()[0])
                         {
                             case "+=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "+" + value; break;
                             case "-=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "-" + value; break;
@@ -50,7 +57,7 @@ namespace GearLanguage.Lang
                             case "/=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "/" + value; break;
                             case "++": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "+ 1"; break;
                             case "--": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "- 1"; break;
-                            default: value = node.GetValue(); break;
+                            default: break;
                         }
 
                         string[] tokens = expressionParser.Parse(value);
@@ -68,7 +75,6 @@ namespace GearLanguage.Lang
             foreach(string token in tokens)
             {
                 string value = token;
-
                 if(tree.VarExists(token))
                 {
                     value = HandleVarCalling(token);
@@ -129,6 +135,15 @@ namespace GearLanguage.Lang
                 }
             }
             HandlePrint(builder.ToString());
+        }
+
+        private string HandleInput(string nValue)
+        {
+            string[] tokens = expressionParser.Parse(nValue);
+            string value = BuildString(tokens);
+            var toPrint = evaluator.Eval(value);
+            Console.Write(toPrint.ToString());
+            return $@"""{Console.ReadLine()}""";
         }
 
         private void HandlePrint(string value)

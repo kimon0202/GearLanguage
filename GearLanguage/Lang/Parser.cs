@@ -33,7 +33,7 @@ namespace GearLanguage.Lang
 
             string methodId = "";
             string funcId = "";
-           
+
             for (int i = 0; i < tokens.Length; i++)
             {
                 if (tokens[i].Contains("#"))
@@ -77,7 +77,27 @@ namespace GearLanguage.Lang
                     {
                         int id = (int)methods[methodId];
                         tree.GetMethod(id).AddNode(node);
-                    }else if(appendToFunc)
+                    } else if (appendToFunc)
+                    {
+                        int id = (int)funcs[funcId];
+                        tree.GetFunction(id).AddNode(node);
+                    }
+                }
+                else if (tokens[i] == "input")
+                {
+                    string valueToPrint = "";
+                    
+                    if (tokens[i + 1].Contains("(\""))
+                        valueToPrint = ClearTokens(tokens[i + 1]);
+
+                    Node node = new Node(tokens[i], valueToPrint);
+
+                    if (appendToMethod)
+                    {
+                        int id = (int)methods[methodId];
+                        tree.GetMethod(id).AddNode(node);
+                    }
+                    else if (appendToFunc)
                     {
                         int id = (int)funcs[funcId];
                         tree.GetFunction(id).AddNode(node);
@@ -97,10 +117,11 @@ namespace GearLanguage.Lang
 
                     vars.Add(name, id);
                 }
-                else if (tokens[i].Contains("=") && tokens[i - 1] != "var" && !tokens[i].Contains("=="))
+                else if (tokens[i].Contains("=") && tokens[i - 1] != "var" && (!tokens[i].Contains("==") || !tokens[i].Contains("!=") || !tokens[i].Contains(">=") || !tokens[i].Contains("<=")))
                 {
                     string name = "";
                     string value = "";
+                    string[] carryAction = new string[2] { null , null };
 
                     string[] tmp = tokens[i].Split(varsDeclarationChars);
                     name = new string(tmp[0].ToCharArray()
@@ -112,14 +133,24 @@ namespace GearLanguage.Lang
                     ).Trim();
                     value = ClearTokens(tmp[1]).Trim();
 
-                    Node node;
-                    VariableNode var = new VariableNode(name, value, VariableType.GENERIC);
+                    if (value.Contains("input"))
+                    {
+                        string valueToPrint = "";
 
-                    if (tokens[i].Contains("+=")) node = new Node(var.GetName(), var.GetValue(), "+=");
-                    else if (tokens[i].Contains("-=")) node = new Node(var.GetName(), var.GetValue(), "-=");
-                    else if (tokens[i].Contains("*=")) node = new Node(var.GetName(), var.GetValue(), "*=");
-                    else if (tokens[i].Contains("/=")) node = new Node(var.GetName(), var.GetValue(), "/=");
-                    else node = new Node(var.GetName(), var.GetValue(), null);
+                        if (tokens[i + 1].Contains(@"(""")) valueToPrint = ClearTokens(tokens[i + 1]);
+
+                        carryAction[1] = valueToPrint;
+                    }
+                    
+                    VariableNode var = new VariableNode(name, value, VariableType.GENERIC);
+                    
+                    if (tokens[i].Contains("+=")) carryAction[0] = "+=";
+                    else if (tokens[i].Contains("-=")) carryAction[0] = "-=";
+                    else if (tokens[i].Contains("*=")) carryAction[0] = "*=";
+                    else if (tokens[i].Contains("/=")) carryAction[0] = "/=";
+                    else carryAction[0] = null;
+
+                    Node node = new Node(var.GetName(), var.GetValue(), carryAction);
 
                     if (appendToMethod)
                     {
@@ -140,7 +171,7 @@ namespace GearLanguage.Lang
                     var value = "";
 
                     VariableNode varNode = new VariableNode(name, value.ToString(), VariableType.GENERIC);
-                    Node node = new Node(varNode.GetName(), varNode.GetValue(), "++");
+                    Node node = new Node(varNode.GetName(), varNode.GetValue(), new string[1] { "++" });
 
                     if (appendToMethod)
                     {
@@ -162,7 +193,7 @@ namespace GearLanguage.Lang
                     var value = "";
 
                     VariableNode varNode = new VariableNode(name, value.ToString(), VariableType.GENERIC);
-                    Node node = new Node(varNode.GetName(), varNode.GetValue(), "--");
+                    Node node = new Node(varNode.GetName(), varNode.GetValue(), new string[1] { "--" });
 
                     if (appendToMethod)
                     {
