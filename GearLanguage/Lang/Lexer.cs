@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
+using GearLanguage.Extensions;
 
 namespace GearLanguage.Lang
 {
@@ -15,17 +17,66 @@ namespace GearLanguage.Lang
             this.code = code;
             tokens = new List<string>();
 
-            codeSplitChars = new char[2]
+            codeSplitChars = new char[]
             {
-                ':',
                 '\n',
+                ':'
             };
         }
 
-        public string[] Tokenize()
+        public string[] TokenizeTest()
         {
             string token = "";
-            string[] splitCode = code.Split(codeSplitChars);
+            List<string> splitCode = new List<string>();
+
+            bool stringInit = false;
+
+            for(int i = 0; i < code.Length; i++)
+            {
+                if (code[i] == '"') stringInit = !stringInit;
+
+                if(code[i] == ':' && !stringInit)
+                {
+                    if (token != "")
+                    {
+                        string value = token.RemoveColon();
+                        value = value.Trim();
+                        splitCode.Add(value);
+                    }
+
+                    token = "";
+                }
+
+                if(code[i] == '\n')
+                {
+                    if(token != "")
+                    {
+                        string value = token.RemoveColon();
+                        value = value.Trim();
+                        splitCode.Add(value);
+                    }
+
+                    token = "";
+                }
+
+                token += code[i];
+            }
+
+            if (token != "")
+            {
+                string value = token.RemoveColon();
+                value = value.Trim();
+                splitCode.Add(value);
+            }
+
+            return splitCode.ToArray();
+        }
+
+        public string[] Tokenize(string[] _split)
+        {
+            string token = "";
+            //string[] splitCode = code.Split(codeSplitChars);
+            string[] splitCode = _split;
 
             foreach(string split in splitCode)
             {

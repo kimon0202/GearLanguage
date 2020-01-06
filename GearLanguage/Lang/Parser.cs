@@ -77,7 +77,8 @@ namespace GearLanguage.Lang
                     {
                         int id = (int)methods[methodId];
                         tree.GetMethod(id).AddNode(node);
-                    } else if (appendToFunc)
+                    }
+                    else if (appendToFunc)
                     {
                         int id = (int)funcs[funcId];
                         tree.GetFunction(id).AddNode(node);
@@ -86,7 +87,7 @@ namespace GearLanguage.Lang
                 else if (tokens[i] == "input")
                 {
                     string valueToPrint = "";
-                    
+
                     if (tokens[i + 1].Contains("(\""))
                         valueToPrint = ClearTokens(tokens[i + 1]);
 
@@ -103,7 +104,7 @@ namespace GearLanguage.Lang
                         tree.GetFunction(id).AddNode(node);
                     }
                 }
-                if (tokens[i] == "var")
+                else if (tokens[i] == "var")
                 {
                     string name = "";
                     string value = "";
@@ -121,7 +122,7 @@ namespace GearLanguage.Lang
                 {
                     string name = "";
                     string value = "";
-                    string[] carryAction = new string[2] { null , null };
+                    string[] carryAction = new string[2] { null, null };
 
                     string[] tmp = tokens[i].Split(varsDeclarationChars);
                     name = new string(tmp[0].ToCharArray()
@@ -141,9 +142,9 @@ namespace GearLanguage.Lang
 
                         carryAction[1] = valueToPrint;
                     }
-                    
+
                     VariableNode var = new VariableNode(name, value, VariableType.GENERIC);
-                    
+
                     if (tokens[i].Contains("+=")) carryAction[0] = "+=";
                     else if (tokens[i].Contains("-=")) carryAction[0] = "-=";
                     else if (tokens[i].Contains("*=")) carryAction[0] = "*=";
@@ -156,13 +157,14 @@ namespace GearLanguage.Lang
                     {
                         int id = (int)methods[methodId];
                         tree.GetMethod(id).AddNode(node);
-                    }else if(appendToFunc)
+                    }
+                    else if (appendToFunc)
                     {
                         int id = (int)funcs[funcId];
                         tree.GetFunction(id).AddNode(node);
                     }
                 }
-                else if(tokens[i].Contains("++"))
+                else if (tokens[i].Contains("++"))
                 {
                     string name = "";
 
@@ -175,7 +177,7 @@ namespace GearLanguage.Lang
 
                     if (appendToMethod)
                     {
-                        int id = (int)methods[methodId];                       
+                        int id = (int)methods[methodId];
                         tree.GetMethod(id).AddNode(node);
                     }
                     else if (appendToFunc)
@@ -206,7 +208,7 @@ namespace GearLanguage.Lang
                         tree.GetFunction(id).AddNode(node);
                     }
                 }
-                else if(tokens[i].Contains("func"))
+                else if (tokens[i].Contains("func"))
                 {
                     string funcName = tokens[i].Split()[1].Trim();
                     string paramsToken = tokens[i + 1];
@@ -219,18 +221,19 @@ namespace GearLanguage.Lang
 
                     funcs.Add(funcId, id);
                 }
-                else if(tree.FuncExists(tokens[i]))
+                else if (tree.FuncExists(tokens[i]))
                 {
                     string paramsToken = tokens[i + 1];
 
                     int id = (int)funcs[tokens[i]];
-                    foreach(Node node in tree.GetFunction(id).GetNodes())
+                    foreach (Node node in tree.GetFunction(id).GetNodes())
                     {
                         if (appendToMethod)
                         {
                             int _id = (int)methods[methodId];
                             tree.GetMethod(_id).AddNode(node);
-                        }else if(appendToFunc)
+                        }
+                        else if (appendToFunc)
                         {
                             int _id = (int)funcs[tokens[i]];
                             tree.GetFunction(_id).AddNode(node);

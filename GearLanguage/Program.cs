@@ -4,6 +4,7 @@ using GearLanguage.Base_Classes;
 using System.IO;
 using System;
 using DynamicExpresso;
+using System.Collections.Generic;
 
 namespace GearLanguage
 {
@@ -11,14 +12,15 @@ namespace GearLanguage
     {
         static string fileName = "input.gear";
         //cahnge this to reflect your pc
-        //static string testFilesPath = "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples";
-        static string testFilesPath = @"E:\modl\GearLanguage\Examples";
+        static string testFilesPath = "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples";
+        //static string testFilesPath = @"E:\modl\GearLanguage\Examples";
 
         static Lexer lexer;
         static Parser parser;
         static Lang.Interpreter interpreter;
 
         static Tree tree;
+        static string[] _tokens;
         static string[] tokens;
 
         static void Main(string[] args)
@@ -27,7 +29,13 @@ namespace GearLanguage
             //Console.WriteLine(data);
 
             lexer = new Lexer(data);
-            tokens = lexer.Tokenize();
+            _tokens = lexer.TokenizeTest();
+            tokens = lexer.Tokenize(_tokens);
+
+            /*foreach(string token in tokens)
+            {
+                Console.WriteLine(token);
+            }*/
 
             parser = new Parser(tokens);
             tree = parser.CreateTree();
