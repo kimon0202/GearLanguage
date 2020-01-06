@@ -1,0 +1,8 @@
+var: name = "";
+var: lastName = "";
+
+method start():
+	name = input("Nome: ");
+	lastName = input("Sobrenome: ");
+	print("Hello, " + name + " " + lastName);
+:end
