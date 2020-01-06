@@ -45,19 +45,41 @@ namespace GearLanguage.Lang
 
                         if (value.Contains("input"))
                         {
-                            value = HandleInput(node.GetCarryAction()[1]);
-                            // value.Replace("input", HandleInput(node.GetCarryAction()[1]));
+                            value = HandleInput(node.GetCarryAction(1)) + value;
+
+                            List<char> tmp = new List<char>(value.ToCharArray());
+                            tmp.ReplaceText("input".ToCharArray(), "".ToCharArray());
+                            value = "";
+                            for (int i = 0; i < tmp.Count; i++)
+                            {
+                                value += tmp[i];
+                            }
                         }
 
-                        switch (node.GetCarryAction()[0])
+                        if (value.Contains("\""))
                         {
-                            case "+=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "+" + value; break;
-                            case "-=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "-" + value; break;
-                            case "*=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "*" + value; break;
-                            case "/=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "/" + value; break;
-                            case "++": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "+ 1"; break;
-                            case "--": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "- 1"; break;
-                            default: break;
+                            switch (node.GetCarryAction(0))
+                            {
+                                case "+=": value = "\"" + tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "\"+" + value; break;
+                                case "-=": value = "\"" + tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "\"-" + value; break;
+                                case "*=": value = "\"" + tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "\"*" + value; break;
+                                case "/=": value = "\"" + tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "\"/" + value; break;
+                                case "++": value = "\"" + tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "\"+ 1"; break;
+                                case "--": value = "\"" + tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "\"- 1"; break;
+                                default: break;
+                            }
+                        } else
+                        {
+                            switch (node.GetCarryAction(0))
+                            {
+                                case "+=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "+" + value; break;
+                                case "-=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "-" + value; break;
+                                case "*=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "*" + value; break;
+                                case "/=": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "/" + value; break;
+                                case "++": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "+ 1"; break;
+                                case "--": value = tree.GetVar(node.GetName()).GetValue().RemoveQuotes() + "- 1"; break;
+                                default: break;
+                            }
                         }
 
                         string[] tokens = expressionParser.Parse(value);
