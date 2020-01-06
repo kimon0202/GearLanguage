@@ -11,7 +11,7 @@ namespace GearLanguage.Base_Classes
         Variable,
         Operator
     }
-     
+    
     class ExpressionNode
     {
         private ExpressionType type;
@@ -27,7 +27,7 @@ namespace GearLanguage.Base_Classes
         {
             return value;
         }
-
+         
         public ExpressionType GetExpressionType()
         {
             return type;

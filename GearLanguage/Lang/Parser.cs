@@ -84,26 +84,6 @@ namespace GearLanguage.Lang
                         tree.GetFunction(id).AddNode(node);
                     }
                 }
-                else if (tokens[i] == "input")
-                {
-                    string valueToPrint = "";
-
-                    if (tokens[i + 1].Contains("(\""))
-                        valueToPrint = ClearTokens(tokens[i + 1]);
-
-                    Node node = new Node(tokens[i], valueToPrint);
-
-                    if (appendToMethod)
-                    {
-                        int id = (int)methods[methodId];
-                        tree.GetMethod(id).AddNode(node);
-                    }
-                    else if (appendToFunc)
-                    {
-                        int id = (int)funcs[funcId];
-                        tree.GetFunction(id).AddNode(node);
-                    }
-                }
                 else if (tokens[i] == "var")
                 {
                     string name = "";
@@ -138,9 +118,14 @@ namespace GearLanguage.Lang
                     {
                         string valueToPrint = "";
 
-                        if (tokens[i + 1].Contains(@"(""")) valueToPrint = ClearTokens(tokens[i + 1]);
+                        string[] tm = tokens[i + 1].Split(")");
+
+                        tm[0] += ")";
+
+                        if (tokens[i + 1].Contains(@"(""") || tokens[i + 1].Contains("(")) valueToPrint = tm[0];
 
                         carryAction[1] = valueToPrint;
+                        value += tm[1];
                     }
 
                     VariableNode var = new VariableNode(name, value, VariableType.GENERIC);
