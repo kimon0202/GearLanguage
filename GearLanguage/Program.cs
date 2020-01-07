@@ -6,14 +6,16 @@ using System;
 using DynamicExpresso;
 using System.Collections.Generic;
 
+//C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples
+
 namespace GearLanguage
 {
     class Program
     {
         static string fileName = "input.gear";
         //cahnge this to reflect your pc
-        //static string testFilesPath = "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples";
-        static string testFilesPath = @"E:\modl\GearLanguage\Examples";
+        static string testFilesPath = "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples";
+        //static string testFilesPath = @"E:\modl\GearLanguage\Examples";
 
         static Lexer lexer;
         static Parser parser;
@@ -27,6 +29,8 @@ namespace GearLanguage
         {
             string data = File.ReadAllText(testFilesPath + "/" + fileName, Encoding.UTF8);
             //Console.WriteLine(data);
+            //string file = args[0];
+            //string data = File.ReadAllText(file, Encoding.UTF8);
 
             lexer = new Lexer(data);
             _tokens = lexer.TokenizeTest();
