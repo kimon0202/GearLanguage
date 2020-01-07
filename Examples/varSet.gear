@@ -4,7 +4,8 @@ func changeVars():
     name = "Gabriel";
     name += " Pasquale"
     anotherVar = "Change Vars!";
-    counter++;
+    counter+=1;
+    #counter++;
 :end
 
 func HandlePrint():
