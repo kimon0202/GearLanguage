@@ -11,11 +11,11 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("GearLanguage")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("NoEnterprise")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("GearLanguage")]
+[assembly: System.Reflection.AssemblyProductAttribute("GearLang")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GearLanguage")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
