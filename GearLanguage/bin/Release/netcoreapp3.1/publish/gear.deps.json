@@ -7,13 +7,13 @@
   "targets": {
     ".NETCoreApp,Version=v3.1": {},
     ".NETCoreApp,Version=v3.1/win-x64": {
-      "GearLanguage/1.0.0": {
+      "gear/1.0.0": {
         "dependencies": {
           "DynamicExpresso.Core": "2.3.1",
           "runtimepack.Microsoft.NETCore.App.Runtime.win-x64": "3.1.0"
         },
         "runtime": {
-          "GearLanguage.dll": {}
+          "gear.dll": {}
         }
       },
       "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/3.1.0": {
@@ -858,7 +858,7 @@
     }
   },
   "libraries": {
-    "GearLanguage/1.0.0": {
+    "gear/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
