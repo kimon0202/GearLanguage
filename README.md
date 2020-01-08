@@ -30,7 +30,7 @@ on your terminal.
 At the folder the project(.csprof file) is located open a new terminal and run:
 
 ``` bash
-  dotner run _pathOfFileToRun_
+  dotnet run _pathOfFileToRun_
 ```
 
 ### Production (Only on Windows)
