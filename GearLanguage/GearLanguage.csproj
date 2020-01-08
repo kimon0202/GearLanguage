@@ -1,8 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Gustavo Teodoro Bauke, Gabriel Pasquale Rodrigues Scavone</Authors>
+    <Product>GearLang</Product>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/kimon0202/GearLanguage</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

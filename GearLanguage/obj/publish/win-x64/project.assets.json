@@ -1,0 +1,128 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "DynamicExpresso.Core/2.3.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/DynamicExpresso.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/DynamicExpresso.Core.dll": {}
+        }
+      }
+    },
+    ".NETCoreApp,Version=v3.1/win-x64": {
+      "DynamicExpresso.Core/2.3.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/DynamicExpresso.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/DynamicExpresso.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DynamicExpresso.Core/2.3.1": {
+      "sha512": "gAoOdAA7KypwC2aEWbm72ZcNj9ERn0GBrFyFrLm9tRZGd+z1rgnKlh+BtWJi9X32ldzOwItY/Ty5ao6CqbG5ig==",
+      "type": "package",
+      "path": "dynamicexpresso.core/2.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dynamicexpresso.core.2.3.1.nupkg.sha512",
+        "dynamicexpresso.core.nuspec",
+        "lib/net45/DynamicExpresso.Core.dll",
+        "lib/net461/DynamicExpresso.Core.dll",
+        "lib/netstandard2.0/DynamicExpresso.Core.dll"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "DynamicExpresso.Core >= 2.3.1"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\gusta\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\GearLanguage\\GearLanguage.csproj",
+      "projectName": "GearLanguage",
+      "projectPath": "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\GearLanguage\\GearLanguage.csproj",
+      "packagesPath": "C:\\Users\\gusta\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\GearLanguage\\obj\\publish\\win-x64\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\gusta\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "dependencies": {
+          "DynamicExpresso.Core": {
+            "target": "Package",
+            "version": "[2.3.1, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+            "version": "[3.1.0, 3.1.0]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Runtime.win-x64",
+            "version": "[3.1.0, 3.1.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+            "version": "[3.1.0, 3.1.0]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "win-x64": {
+        "#import": []
+      }
+    }
+  }
+}
