@@ -1,8 +1,0 @@
-var: name = " ";
-var: lastName = "";
-
-method start():
-    name += input("Digite seu nome: ") + " ";
-    lastName = input("Digite seu sobrenome: ");
-    print("Ola," + name + lastName);
-:end
