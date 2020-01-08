@@ -1,9 +1,3 @@
-C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\GearLanguage.exe
-C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\GearLanguage.deps.json
-C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\GearLanguage.runtimeconfig.json
-C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\GearLanguage.runtimeconfig.dev.json
-C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\GearLanguage.dll
-C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\GearLanguage.pdb
 C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\DynamicExpresso.Core.dll
 C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\Microsoft.CSharp.dll
 C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\Microsoft.VisualBasic.Core.dll
@@ -228,5 +222,11 @@ C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreap
 C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\obj\Release\netcoreapp3.1\win-x64\GearLanguage.AssemblyInfoInputs.cache
 C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\obj\Release\netcoreapp3.1\win-x64\GearLanguage.AssemblyInfo.cs
 C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\obj\Release\netcoreapp3.1\win-x64\GearLanguage.csproj.CopyComplete
-C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\obj\Release\netcoreapp3.1\win-x64\GearLanguage.dll
-C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\obj\Release\netcoreapp3.1\win-x64\GearLanguage.pdb
+C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\gear.exe
+C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\gear.deps.json
+C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\gear.runtimeconfig.json
+C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\gear.runtimeconfig.dev.json
+C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\gear.dll
+C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\gear.pdb
+C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\obj\Release\netcoreapp3.1\win-x64\gear.dll
+C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\obj\Release\netcoreapp3.1\win-x64\gear.pdb
