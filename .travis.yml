@@ -1,6 +1,7 @@
 language: csharp
 solution: GearLanguage.sln
-mono: none
-dotnet: 3.1.100
-script:
- - dotnet restore
+jobs:
+  include:
+    - dotnet: 3.1.100
+      mono: none
+    - mono: latest
