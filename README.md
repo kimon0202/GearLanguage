@@ -1,4 +1,4 @@
-# Gear · Language ![GitHub license](https://img.shields.io/badge/license-MIT-green.svg) ![Build Status](https://travis-ci.com/kimon0202/GearLanguage.svg?branch=master)](https://travis-ci.com/kimon0202/GearLanguage)
+# Gear · Language ![GitHub license](https://img.shields.io/badge/license-MIT-green.svg) [![Build Status](https://travis-ci.com/kimon0202/GearLanguage.svg?branch=master)](https://travis-ci.com/kimon0202/GearLanguage)
 
 GearLang is a interpreted programming language that offers scripting features to process plain text and serialized files, or manage system tasks. It is simple and straightforward.
 
