@@ -3,8 +3,6 @@ using GearLanguage.Lang;
 using GearLanguage.Base_Classes;
 using System.IO;
 using System;
-using DynamicExpresso;
-using System.Collections.Generic;
 
 //C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples
 
@@ -19,7 +17,8 @@ namespace GearLanguage
 
         static Lexer lexer;
         static Parser parser;
-        static Lang.Interpreter interpreter;
+        static Interpreter interpreter;
+        static ErrorHandler errorHandler;
 
         static Tree tree;
         static string[] _tokens;
@@ -28,15 +27,17 @@ namespace GearLanguage
 
         static void Main(string[] args)
         {
+            errorHandler = new ErrorHandler();
             //string data = File.ReadAllText(testFilesPath + "/" + fileName, Encoding.UTF8);
             //Console.WriteLine(data);
             //string file = args[0];
             //string data = File.ReadAllText(file, Encoding.UTF8);
 
             //string pathEnv = Environment.GetEnvironmentVariable("Path");
-            if(args == null)
+            if(args.Length == 0)
             {
-                throw new Exception("File not found! Remember to specify file name.");
+                errorHandler.LogError("Error: Bad command -> File name can't be null!");
+                return;
             }
 
             string curPath = Environment.CurrentDirectory;
@@ -72,10 +73,14 @@ namespace GearLanguage
                 parser = new Parser(tokens);
                 tree = parser.CreateTree();
 
-                interpreter = new Lang.Interpreter(tree);
+                interpreter = new Interpreter(tree);
                 interpreter.Run();
             }
-            else throw new Exception(fileName + " does not exists at " + curPath);
+            else
+            {
+                errorHandler.LogError("Error: File not found -> " + fileName + " don't exist in " + curPath);
+                return;
+            }
         }
     }
 }
