@@ -5,8 +5,14 @@ using GearLanguage.Base_Classes;
 using GearLanguage.Extensions;
 using DynamicExpresso;
 
+/// Todo:
+/// Comment this code better
+
 namespace GearLanguage.Lang
 {
+    /// <summary>
+    /// Read the ANT from the lexer and output results
+    /// </summary>
     class Interpreter
     {
         private Tree tree;
@@ -20,7 +26,7 @@ namespace GearLanguage.Lang
             this.tree = tree;
             addSymbol = new char[] { '+' };
 
-            expressionParser = new ExpressionParser(tree);
+            expressionParser = new ExpressionParser();
             evaluator = new DynamicExpresso.Interpreter();
         }
 
@@ -182,10 +188,6 @@ namespace GearLanguage.Lang
 
         private string HandleVarCalling(string varName)
         {
-            ///Change later
-            ///Evaluate var
-            ///before return
-
             return tree.GetVar(varName).GetValue();
         }
     }

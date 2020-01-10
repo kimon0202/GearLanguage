@@ -34,6 +34,11 @@ namespace GearLanguage
             //string data = File.ReadAllText(file, Encoding.UTF8);
 
             //string pathEnv = Environment.GetEnvironmentVariable("Path");
+            if(args == null)
+            {
+                throw new Exception("File not found! Remember to specify file name.");
+            }
+
             string curPath = Environment.CurrentDirectory;
             string fileName = args[0];
 

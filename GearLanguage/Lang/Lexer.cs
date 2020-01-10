@@ -3,27 +3,46 @@ using System.Linq;
 using System;
 using GearLanguage.Extensions;
 
+/// Todo:
+/// remove second layer of foreach in tokenize
+/// in order to improve lexing performance
+
 namespace GearLanguage.Lang
 {
+    /// <summary>
+    /// Handles spliting large chuncks of gear code
+    /// into smaller tokens that will be passed to
+    /// the parser later on the process
+    /// </summary>
     class Lexer
     {
-        private string code;
+        /// <summary>
+        /// Variable that holds the actual code that was in the file
+        /// given in the command line.
+        /// </summary>
+        private readonly string code;
+
+        /// <summary>
+        /// Varibale that holds the tokens created from the gear code
+        /// specified on the "code" variable.
+        /// </summary>
         private List<string> tokens;
 
-        private char[] codeSplitChars;
-
+        /// <summary>
+        /// Constructor: Initialize tokens list and saves the file content
+        /// in "code variable"
+        /// </summary>
+        /// <param name="code">Content from the file given in the command line</param>
         public Lexer(string code)
         {
             this.code = code;
             tokens = new List<string>();
-
-            codeSplitChars = new char[]
-            {
-                '\n',
-                ':'
-            };
         }
 
+        /// <summary>
+        /// Breaks up gear file content in different lines
+        /// </summary>
+        /// <returns>Array of lines from gear file</returns>
         public string[] TokenizeTest()
         {
             string token = "";
@@ -72,6 +91,11 @@ namespace GearLanguage.Lang
             return splitCode.ToArray();
         }
 
+        /// <summary>
+        /// Splits lines into tokens
+        /// </summary>
+        /// <param name="_split">Lines of gear code</param>
+        /// <returns>Tokens</returns>
         public string[] Tokenize(string[] _split)
         {
             string token = "";
@@ -103,6 +127,13 @@ namespace GearLanguage.Lang
             return ClearTokens(returnArray);
         }
 
+        /// <summary>
+        /// Cleans tokens by removing unnecessary chars, such as ';'.
+        /// Also removes empty tokens from the content that will be
+        /// given to the parser.
+        /// </summary>
+        /// <param name="_tokens">Array of tokens to clean</param>
+        /// <returns>Array of cleaned tokens</returns>
         private string[] ClearTokens(string[] _tokens)
         {
             List<string> tmpList = new List<string>();
