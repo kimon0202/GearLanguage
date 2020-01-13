@@ -3,6 +3,7 @@ using GearLanguage.Lang;
 using GearLanguage.Base_Classes;
 using System.IO;
 using System;
+using GearLanguage.Errors;
 
 //C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples
 
@@ -36,7 +37,7 @@ namespace GearLanguage
             //string pathEnv = Environment.GetEnvironmentVariable("Path");
             if(args.Length == 0)
             {
-                errorHandler.LogError("Error: Bad command -> File name can't be null!");
+                errorHandler.LogError(ErrorsList.CLI.fileNameNotProvided);
                 return;
             }
 
@@ -45,17 +46,31 @@ namespace GearLanguage
 
             if(fileName.Contains(":\\"))
             {
-                data = File.ReadAllText(fileName, Encoding.UTF8);
+                try
+                {
+                    data = File.ReadAllText(fileName, Encoding.UTF8);
+                } catch
+                {
+                    errorHandler.LogError(ErrorsList.CLI.fileNotFound);
+                    return;
+                }
             }else
             {
-                string[] filesInCurDir = Directory.GetFiles(curPath);
-                foreach (string file in filesInCurDir)
+                try
                 {
-                    if (file.Contains(fileName))
+                    string[] filesInCurDir = Directory.GetFiles(curPath);
+                    foreach (string file in filesInCurDir)
                     {
-                        data = File.ReadAllText(file, Encoding.UTF8);
-                        break;
+                        if (file.Contains(fileName))
+                        {
+                            data = File.ReadAllText(file, Encoding.UTF8);
+                            break;
+                        }
                     }
+                } catch
+                {
+                    errorHandler.LogError(ErrorsList.CLI.fileNotFound);
+                    return;
                 }
             }
 
@@ -78,7 +93,7 @@ namespace GearLanguage
             }
             else
             {
-                errorHandler.LogError("Error: File not found -> " + fileName + " don't exist in " + curPath);
+                errorHandler.LogError(ErrorsList.CLI.fileNotFound);
                 return;
             }
         }

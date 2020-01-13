@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using GearLanguage.Utils;
+using GearLanguage.Errors;
 
 namespace GearLanguage.Lang
 {
@@ -18,6 +19,24 @@ namespace GearLanguage.Lang
         {
             Console.ForegroundColor = defaultErrorColor;
             Console.WriteLine(error);
+            Console.ResetColor();
+        }
+
+        public void LogError(Error error)
+        {
+            InitializeColors();
+            Console.WriteLine(error.GetErrorType() + " " + error.GetId() + ": " + error.GetName());
+            Console.WriteLine(error.GetBody());
+            ResetColors();
+        }
+
+        private void InitializeColors()
+        {
+            Console.ForegroundColor = defaultErrorColor;
+        }
+
+        private void ResetColors()
+        {
             Console.ResetColor();
         }
     }
