@@ -27,9 +27,9 @@ on your terminal.
 
 Click on the download link of your OS and extract the files.
 
-[Linux](https://github.com/kimon0202/GearLanguage/releases/download/alpha-1.0.0/linux-x64.rar)
-[MacOS](https://github.com/kimon0202/GearLanguage/releases/download/alpha-1.0.0/osx-x64.rar)
-[Windows](https://github.com/kimon0202/GearLanguage/releases/download/alpha-1.0.0/win-x64.rar)
+*[Linux](https://github.com/kimon0202/GearLanguage/releases/download/alpha-1.0.0/linux-x64.rar)
+*[MacOS](https://github.com/kimon0202/GearLanguage/releases/download/alpha-1.0.0/osx-x64.rar)
+*[Windows](https://github.com/kimon0202/GearLanguage/releases/download/alpha-1.0.0/win-x64.rar)
 
 After extracting the files, you should add the extracted folder to your PATH Environmental Variable.
 
