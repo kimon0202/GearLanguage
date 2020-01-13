@@ -4,6 +4,7 @@ using System.Text;
 using GearLanguage.Base_Classes;
 using GearLanguage.Extensions;
 using DynamicExpresso;
+using GearLanguage.Errors;
 
 /// Todo:
 /// Comment this code better
@@ -21,6 +22,8 @@ namespace GearLanguage.Lang
         private ExpressionParser expressionParser;
         private DynamicExpresso.Interpreter evaluator;
 
+        private ErrorHandler errorHandler;
+
         public Interpreter(Tree tree)
         {
             this.tree = tree;
@@ -28,6 +31,8 @@ namespace GearLanguage.Lang
 
             expressionParser = new ExpressionParser();
             evaluator = new DynamicExpresso.Interpreter();
+
+            errorHandler = new ErrorHandler();
         }
 
         public void Run()
@@ -118,7 +123,7 @@ namespace GearLanguage.Lang
         {
             string[] splitValue;
             StringBuilder builder = new StringBuilder();
-            
+
             if (value.Contains("+"))
             {
                 splitValue = value.Split(addSymbol);
@@ -134,13 +139,10 @@ namespace GearLanguage.Lang
 
                         builder.Append(newValue);
                     }
-                    else
+                    else if (splitValue[i].Contains("\""))
                     {
-                        if (splitValue[i].Contains("\""))
-                        {
-                            string newValue = splitValue[i].RemoveQuotes();
-                            builder.Append(newValue);
-                        }
+                        string newValue = splitValue[i].RemoveQuotes();
+                        builder.Append(newValue);
                     }
                 }
             }
@@ -153,13 +155,10 @@ namespace GearLanguage.Lang
 
                     builder.Append(newValue);
                 }
-                else
+                else if (value.Contains("\""))
                 {
-                    if (value.Contains("\""))
-                    {
-                        value = value.RemoveQuotes();
-                        builder.Append(value);
-                    }
+                    value = value.RemoveQuotes();
+                    builder.Append(value);
                 }
             }
             HandlePrint(builder.ToString());

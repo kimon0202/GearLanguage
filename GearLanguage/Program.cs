@@ -3,8 +3,7 @@ using GearLanguage.Lang;
 using GearLanguage.Base_Classes;
 using System.IO;
 using System;
-using DynamicExpresso;
-using System.Collections.Generic;
+using GearLanguage.Errors;
 
 //C:\\Users\\gusta\\Desktop\\Workspace\\GearLanguage\\Examples
 
@@ -19,7 +18,8 @@ namespace GearLanguage
 
         static Lexer lexer;
         static Parser parser;
-        static Lang.Interpreter interpreter;
+        static Interpreter interpreter;
+        static ErrorHandler errorHandler;
 
         static Tree tree;
         static string[] _tokens;
@@ -28,15 +28,17 @@ namespace GearLanguage
 
         static void Main(string[] args)
         {
+            errorHandler = new ErrorHandler();
             //string data = File.ReadAllText(testFilesPath + "/" + fileName, Encoding.UTF8);
             //Console.WriteLine(data);
             //string file = args[0];
             //string data = File.ReadAllText(file, Encoding.UTF8);
 
             //string pathEnv = Environment.GetEnvironmentVariable("Path");
-            if(args == null)
+            if(args.Length == 0)
             {
-                throw new Exception("File not found! Remember to specify file name.");
+                errorHandler.LogError(ErrorsList.CLI.fileNameNotProvided);
+                return;
             }
 
             string curPath = Environment.CurrentDirectory;
@@ -44,17 +46,31 @@ namespace GearLanguage
 
             if(fileName.Contains(":\\"))
             {
-                data = File.ReadAllText(fileName, Encoding.UTF8);
+                try
+                {
+                    data = File.ReadAllText(fileName, Encoding.UTF8);
+                } catch
+                {
+                    errorHandler.LogError(ErrorsList.CLI.fileNotFound);
+                    return;
+                }
             }else
             {
-                string[] filesInCurDir = Directory.GetFiles(curPath);
-                foreach (string file in filesInCurDir)
+                try
                 {
-                    if (file.Contains(fileName))
+                    string[] filesInCurDir = Directory.GetFiles(curPath);
+                    foreach (string file in filesInCurDir)
                     {
-                        data = File.ReadAllText(file, Encoding.UTF8);
-                        break;
+                        if (file.Contains(fileName))
+                        {
+                            data = File.ReadAllText(file, Encoding.UTF8);
+                            break;
+                        }
                     }
+                } catch
+                {
+                    errorHandler.LogError(ErrorsList.CLI.fileNotFound);
+                    return;
                 }
             }
 
@@ -72,10 +88,14 @@ namespace GearLanguage
                 parser = new Parser(tokens);
                 tree = parser.CreateTree();
 
-                interpreter = new Lang.Interpreter(tree);
+                interpreter = new Interpreter(tree);
                 interpreter.Run();
             }
-            else throw new Exception(fileName + " does not exists at " + curPath);
+            else
+            {
+                errorHandler.LogError(ErrorsList.CLI.fileNotFound);
+                return;
+            }
         }
     }
 }
