@@ -71,7 +71,7 @@ to update your terminal or close the terminal window and open it again.
 
 ### Windows
 
-Open **Control Panel**, click at **System** and the on **Advanced System Settings**. Now click on **Environment Variables**, and under the System Variables category look for a PATH variable. Double-click it and add ```C:\Users\gusta\Desktop\Workspace\GearLanguage\GearLanguage\bin\Release\netcoreapp3.1\win-x64\``` to a new line. Click **OK** to close the opened windows.
+Open **Control Panel**, click at **System** and the on **Advanced System Settings**. Now click on **Environment Variables**, and under the System Variables category look for a PATH variable. Double-click it and add ```[PathOfTheIntallation]\GearLanguage\bin\Release\netcoreapp3.1\win-x64\``` to a new line. Click **OK** to close the opened windows.
 
 ## Running the application
 
